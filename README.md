@@ -11,8 +11,7 @@ package.
 
 - `emit_updater_script.py` - build tool. Packages a payload directory as
   `tar.gz`, embeds it as base64, and emits a runner script.
-- `updater.py` - generated runner script. This is the file teachers copy to the
-  controller.
+- `patch_serial.py` - generated runner script. This is the file teachers copy to the controller.
 - `serial_update/` - test update package for the serial scripts.
 
 ## Build a New Updater
@@ -34,7 +33,7 @@ Optional flags:
 2. Add this to `main.py`:
 
    ```python
-   from updater import update
+   from patch_<name> import update
    update()
    ```
 
@@ -56,11 +55,9 @@ payload/
   other files needed by update.py
 ```
 
-The whole directory is embedded into `updater.py` as a `tar.gz` archive.
+The whole payload is embedded into `patch_serial.py` as a `tar.gz` archive.
 
 ## manifest.json
-
-`manifest.json` is intentionally small:
 
 ```json
 {
@@ -100,7 +97,7 @@ print useful status.
 Build it with:
 
 ```sh
-./emit_updater_script.py serial_update -o updater.py
+./emit_updater_script.py serial_update -o patch_serial.py
 ```
 
 It installs:
@@ -119,7 +116,5 @@ Skipped on purpose:
 - dependency resolution
 - service restart orchestration
 - manifest-driven file maps
-- remote downloads
-- `tar.xz` compression
 
 Add these only when a real update needs them.
