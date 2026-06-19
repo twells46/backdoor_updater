@@ -1,0 +1,5 @@
+{
+  "name": "serial_update",
+  "version": "2026-06-19",
+  "entrypoint": "update.py"
+}
